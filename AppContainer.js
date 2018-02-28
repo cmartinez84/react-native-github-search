@@ -14,10 +14,12 @@ import {
   TouchableHighlight,
   ActivityIndicator,
   TabBarIOS,
+  NavigatorIOS,
   View
 } from 'react-native';
 
 import Feed from './Feed.js';
+import PushPayload from './PushPayload.js';
 
 const buffer =require('buffer');
 type Props = {};
@@ -39,7 +41,13 @@ export default class AppContainer extends Component<Props> {
           icon={require('./img/inbox.png')}
           onPress={()=>this.setState({selectedTab: 'feed'})}
           >
-          <Feed></Feed>
+            <NavigatorIOS
+              style={{flex: 1}}
+              initialRoute={{
+                component: Feed,
+                title: 'Feed'
+              }}>
+            </NavigatorIOS>
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="Search"

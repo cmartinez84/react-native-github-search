@@ -11,10 +11,12 @@ import {
   ListView,
   StyleSheet,
   ActivityIndicator,
+  TouchableHighlight,
   Image
 } from 'react-native';
 import moment from 'moment';
 import AuthService from './AuthService';
+import PushPayload from './PushPayload';
 // const buffer =require('buffer');
 type Props = {};
 
@@ -34,7 +36,8 @@ export default class Feed extends Component<Props> {
   }
   fetchFeed(){
     AuthService.getAuthInfo((err, authInfo)=>{
-      var github_sn = authInfo.user.login;
+      // var github_sn = authInfo.user.login;
+
       var url = `http://api.github.com/users/${github_sn}/received_events`;
 
       fetch(url, {
@@ -56,9 +59,21 @@ export default class Feed extends Component<Props> {
       })//end then
     })
   }
+  pressRow(rowData){
+    this.props.navigator.push({
+      title: 'Push Event',
+      component: PushPayload,
+      passProps: {
+        pushEvent: rowData
+      }
+    })
+  }
   renderRow(rowData){
       return(
-        <View style={styles.rowStyle}>
+        <TouchableHighlight
+          onPress={()=>this.pressRow(rowData)}
+          underlayColor="#ddd">
+          <View style={styles.rowStyle}>
           <Image
             style={{height: 36,
               width: 36,
@@ -79,6 +94,7 @@ export default class Feed extends Component<Props> {
             </Text>
           </View>
         </View>
+        </TouchableHighlight>
         )
   }
 
