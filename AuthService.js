@@ -14,7 +14,6 @@ class AuthService {
         return cb();
       }
       var zippedObj = _.fromPairs(val);
-      console.log(zippedObj);
       if(!zippedObj[authKey]){
         // console.log("bang");
         return cb();
@@ -25,7 +24,6 @@ class AuthService {
         },
         user: JSON.parse(zippedObj[userKey])
       }
-      console.log(authInfo);
       return cb(null, authInfo);
     })
 
@@ -64,7 +62,6 @@ class AuthService {
         if(err){
           throw err;
         }
-        console.log(AsyncStorage);
         return cb({success: true});
       })
 

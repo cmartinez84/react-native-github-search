@@ -17,6 +17,8 @@ import {
   View
 } from 'react-native';
 
+import Feed from './Feed.js';
+
 const buffer =require('buffer');
 type Props = {};
 
@@ -37,7 +39,7 @@ export default class AppContainer extends Component<Props> {
           icon={require('./img/inbox.png')}
           onPress={()=>this.setState({selectedTab: 'feed'})}
           >
-          <Text style={styles.welcome}>Tab1</Text>
+          <Feed></Feed>
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="Search"
